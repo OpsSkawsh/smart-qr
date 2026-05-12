@@ -2,30 +2,35 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 // Android Play Store URL
 const PLAYSTORE_URL =
-  'https://play.google.com/store/apps/details?id=com.skawsh.app';
+  'https://play.google.com/store/apps/details?id=com.skawsh.user';
 
 
 // Apple App Store URL
 const APPSTORE_URL =
-  'https://apps.apple.com/in/app/skawsh/id1234567890';
+  'https://apps.apple.com/in/app/skawsh/id6757456162';
 
 
 // Website URL
 const WEBSITE_URL =
-  'https://skawsh.com';
+  'https://www.skawsh.com';
 
+
+// Home Route
+app.get('/', (req, res) => {
+  res.send('Skawsh Smart QR Service Running');
+});
 
 
 // QR Route
 app.get('/app', (req, res) => {
 
   // Detect device
-  const userAgent = req.headers['user-agent'];
+  const userAgent = req.headers['user-agent'] || '';
 
   console.log('Device:', userAgent);
 
@@ -47,6 +52,11 @@ app.get('/app', (req, res) => {
 
 });
 
+
+// Fallback Route
+app.use((req, res) => {
+  res.status(404).send('Route Not Found');
+});
 
 
 // Start server
