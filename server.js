@@ -20,22 +20,28 @@ const WEBSITE_URL =
   'https://www.skawsh.com';
 
 
-// Root Route for skawsh.org
+// Home Route
 app.get('/', (req, res) => {
+  res.send('Skawsh Smart QR Service Running');
+});
+
+
+// QR Route
+app.get('/app', (req, res) => {
 
   // Detect device
   const userAgent = req.headers['user-agent'] || '';
 
   console.log('Device:', userAgent);
 
-
+  
   // Android users
   if (/android/i.test(userAgent)) {
     return res.redirect(PLAYSTORE_URL);
   }
 
 
-  // iPhone/iPad users
+  // iPhone users
   if (/iPhone|iPad|iPod/i.test(userAgent)) {
     return res.redirect(APPSTORE_URL);
   }
@@ -53,7 +59,9 @@ app.use((req, res) => {
 });
 
 
-// Start Server
+// Start server
 app.listen(PORT, () => {
+
   console.log(`Server Running On Port ${PORT}`);
+
 });
