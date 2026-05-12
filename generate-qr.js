@@ -2,7 +2,7 @@ const QRCode = require('qrcode');
 
 
 // URL inside QR code
-const url = 'http://localhost:3000/app';
+const url = 'https://skawsh.org';
 
 
 // Generate QR image
